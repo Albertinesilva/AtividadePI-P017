@@ -1,56 +1,44 @@
-#include "CarrinhoDeCompras.hpp"
-#include<iomanip>
+#include <iostream>
+#include <vector>
+#include "Produto.h"
+#include "CarrinhoDeCompras.h"
 
-int Produto::numProdutos = 0;
+using namespace std;
 
-int main(){
+int main()
+{
+  Produto produto1("Maçã", 2.5);
+  Produto produto2("Arroz", 10.0);
+  Produto produto3("Leite", 4.0);
 
-    Produto p1("Maçã", 2.5);
-    Produto p2("Arroz", 10.0);
-    Produto p3("Leite", 4.0,4);
-    CarrinhoDeCompras carrinho;
+  CarrinhoDeCompras carrinho;
+  carrinho.adicionarProduto(produto1, 3);
+  carrinho.adicionarProduto(produto2, 2);
+  carrinho.adicionarProduto(produto3, 1);
 
-    
-    p1.estoque.insereProdutoNoEstoque(25);
-    p2.estoque.insereProdutoNoEstoque(25);
-    p3.estoque.insereProdutoNoEstoque(25);
-    p1.estoque.retiraProdutoEstoque(10);
-    
-    carrinho.adicionarProduto(p1, 3);
-    carrinho.adicionarProduto(p2, 2);
-    carrinho.adicionarProduto(p3, 1);
-    double valorTotal = carrinho.calcularValorTotal();
-    cout << "Valor total da compra: " << valorTotal << endl;
-    // Resposta: Valor total da compra: 31.5
+  double valorTotal = carrinho.calcularValorTotal();
+  cout << "\n\tValor total da compra: " << valorTotal << "\n" << endl;
 
-    carrinho.removerProduto(p2, 1);
-    valorTotal = carrinho.calcularValorTotal();
-    cout << "Valor total após remoção: " << valorTotal << endl;
-    // Resposta: Valor total após remoção: 21.5
+  carrinho.removerProduto(produto2, 1);
+  valorTotal = carrinho.calcularValorTotal();
+  cout << "\n\tValor total após remoção: " << valorTotal << "\n" << endl;
 
-    carrinho.esvaziarCarrinho();
-    valorTotal = carrinho.calcularValorTotal();
-    cout << "Valor total após esvaziar o carrinho: " << fixed << setprecision(1) << valorTotal << endl;
-    // Resposta: Valor total após esvaziar o carrinho: 0.0
+  carrinho.esvaziarCarrinho();
+  valorTotal = carrinho.calcularValorTotal();
+  cout << "\n\tValor total após esvaziar o carrinho: " << valorTotal << "\n" << endl;
 
-    Produto p4("Chocolate", 3.0);
-    p4.estoque.insereProdutoNoEstoque(5);
-    // carrinho.ExibirCarrinho();
-    // carrinho.adicionarProduto(p4, 10); // Supondo estoque limitado a 5 unidades
-    // cout << "Quantidade de chocolates no carrinho: " << carrinho.getQuantidadeProduto(p4) << endl;
-    // // Resposta: Quantidade de chocolates no carrinho: 5
+  Produto produto4("Chocolate", 3.0);
+  carrinho.adicionarProduto(produto4, 10);
+  cout << "\n\tQuantidade de chocolates no carinho: " << carrinho.getQuantidadeDeProdutos(produto4) << "\n" << endl;
 
-    carrinho.adicionarProduto(p1, 2);
-    carrinho.adicionarProduto(p2, 3);
-    carrinho.adicionarProduto(p3, 1);
-    carrinho.adicionarProduto(p4, 2);
-    carrinho.exibirCarrinho();
-    // Resposta: Carrinho de Compras:
-    // - Maçã (2.5) x 2
-    // - Arroz (10.0) x 3
-    // - Leite (4.0) x 1
-    // - Chocolate (3.0) x 2
+  carrinho.esvaziarCarrinho();
 
+  carrinho.adicionarProduto(produto1, 2);
+  carrinho.adicionarProduto(produto2, 3);
+  carrinho.adicionarProduto(produto3, 1);
+  carrinho.adicionarProduto(produto4, 2);
 
-    return 0;
+  carrinho.exibirCarrinho();
+
+  printf("\n\tValor total da compra: %.2f\n\n", carrinho.calcularValorTotal());
 }
